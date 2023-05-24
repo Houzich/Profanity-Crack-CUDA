@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{CB3CA371-C0F0-4706-88FD-B65BED084126}"
+	ProjectSection(SolutionItems) = preProject
+		exe\config.cfg = exe\config.cfg
+		exe\ProfanityCrack.exe = exe\ProfanityCrack.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -42,6 +48,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CB3CA371-C0F0-4706-88FD-B65BED084126} = {8743C048-23D5-4553-B568-F06100F6D8A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BFFDBB2-D316-40FD-A1DD-FB30AD3869D3}

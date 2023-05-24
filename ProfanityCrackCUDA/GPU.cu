@@ -22,7 +22,7 @@
 
 #define MP_NWORDS 8
 
-typedef uint32_t mp_word;
+typedef uint32_t uint32_t;
 
 typedef union {
 	uint8_t b[200];
@@ -194,10 +194,10 @@ __constant__ const mp_number mod = { {0xfffffc2f, 0xfffffffe, 0xffffffff, 0xffff
 
 // Multiprecision subtraction. Underflow signalled via return value.
 __device__
-mp_word mp_sub(mp_number* const r, const mp_number* const a, const mp_number* const b) {
-	mp_word t, c = 0;
+uint32_t mp_sub(mp_number* const r, const mp_number* const a, const mp_number* const b) {
+	uint32_t t, c = 0;
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		t = a->d[i] - b->d[i] - c;
 		c = t > a->d[i] ? 1 : (t == a->d[i] ? c : 0);
 
@@ -209,12 +209,12 @@ mp_word mp_sub(mp_number* const r, const mp_number* const a, const mp_number* co
 
 // Multiprecision subtraction of the modulus saved in mod. Underflow signalled via return value.
 __device__
-mp_word mp_sub_mod(mp_number* const r) {
+uint32_t mp_sub_mod(mp_number* const r) {
 	mp_number mod = { {0xfffffc2f, 0xfffffffe, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff} };
 
-	mp_word t, c = 0;
+	uint32_t t, c = 0;
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		t = r->d[i] - mod.d[i] - c;
 		c = t > r->d[i] ? 1 : (t == r->d[i] ? c : 0);
 
@@ -234,7 +234,7 @@ mp_word mp_sub_mod(mp_number* const r) {
 //      or not by inspecting the carry value. M refers to the modulus saved in variable mod.
 __device__
 void mp_mod_sub(mp_number* const r, const mp_number* const a, const mp_number* const b) {
-	mp_word i, t, c = 0;
+	uint32_t i, t, c = 0;
 
 	for (i = 0; i < MP_WORDS; ++i) {
 		t = a->d[i] - b->d[i] - c;
@@ -257,7 +257,7 @@ void mp_mod_sub(mp_number* const r, const mp_number* const a, const mp_number* c
 // constant numbers would lead to increase in performance. Judges are still out on this one.
 __device__
 void mp_mod_sub_const(mp_number* const r, const mp_number* const a, const mp_number* const b) {
-	mp_word i, t, c = 0;
+	uint32_t i, t, c = 0;
 
 	for (i = 0; i < MP_WORDS; ++i) {
 		t = a->d[i] - b->d[i] - c;
@@ -279,7 +279,7 @@ void mp_mod_sub_const(mp_number* const r, const mp_number* const a, const mp_num
 // Specialization of mp_mod_sub in hope of performance gain.
 __device__
 void mp_mod_sub_gx(mp_number* const r, const mp_number* const a) {
-	mp_word i, t, c = 0;
+	uint32_t i, t, c = 0;
 
 	t = a->d[0] - 0x16f81798; c = t < a->d[0] ? 0 : (t == a->d[0] ? c : 1); r->d[0] = t;
 	t = a->d[1] - 0x59f2815b - c; c = t < a->d[1] ? 0 : (t == a->d[1] ? c : 1); r->d[1] = t;
@@ -301,7 +301,7 @@ void mp_mod_sub_gx(mp_number* const r, const mp_number* const a) {
 
 //__device__
 //void mp_mod_sub_gx(mp_number* const r, const mp_number* const a) {
-//	mp_word i, t, c = 0;
+//	uint32_t i, t, c = 0;
 //
 //	t = a->d[0] - 0xe907e497; c = t < a->d[0] ? 0 : (t == a->d[0] ? c : 1); r->d[0] = t;
 //	t = a->d[1] - 0xa60d7ea3 - c; c = t < a->d[1] ? 0 : (t == a->d[1] ? c : 1); r->d[1] = t;
@@ -325,7 +325,7 @@ void mp_mod_sub_gx(mp_number* const r, const mp_number* const a) {
 // Specialization of mp_mod_sub in hope of performance gain.
 //__device__
 //void mp_mod_sub_gy(mp_number* const r, const mp_number* const a) {
-//	mp_word i, t, c = 0;
+//	uint32_t i, t, c = 0;
 //
 //	t = a->d[0] - 0xfb10d4b8; c = t < a->d[0] ? 0 : (t == a->d[0] ? c : 1); r->d[0] = t;
 //	t = a->d[1] - 0x9c47d08f - c; c = t < a->d[1] ? 0 : (t == a->d[1] ? c : 1); r->d[1] = t;
@@ -347,7 +347,7 @@ void mp_mod_sub_gx(mp_number* const r, const mp_number* const a) {
 
 __device__
 void mp_mod_sub_gy(mp_number* const r, const mp_number* const a) {
-	mp_word i, t, c = 0;
+	uint32_t i, t, c = 0;
 
 	t = a->d[0] - 0x04ef2777; c = t < a->d[0] ? 0 : (t == a->d[0] ? c : 1); r->d[0] = t;
 	t = a->d[1] - 0x63b82f6f - c; c = t < a->d[1] ? 0 : (t == a->d[1] ? c : 1); r->d[1] = t;
@@ -372,10 +372,10 @@ void mp_mod_sub_gy(mp_number* const r, const mp_number* const a) {
 
 // Multiprecision addition. Overflow signalled via return value.
 __device__
-mp_word mp_add(mp_number* const r, const mp_number* const a) {
-	mp_word c = 0;
+uint32_t mp_add(mp_number* const r, const mp_number* const a) {
+	uint32_t c = 0;
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		r->d[i] += a->d[i] + c;
 		c = r->d[i] < a->d[i] ? 1 : (r->d[i] == a->d[i] ? c : 0);
 	}
@@ -385,11 +385,11 @@ mp_word mp_add(mp_number* const r, const mp_number* const a) {
 
 // Multiprecision addition. Overflow signalled via return value.
 __device__
-mp_word mp_add_size(mp_number* const r, const uint32_t a) {
-	mp_word c = 0;
+uint32_t mp_add_size(mp_number* const r, const uint32_t a) {
+	uint32_t c = 0;
 	r->d[0] += a;
 	c = r->d[0] < a ? 1 : (r->d[0] == a ? c : 0);
-	for (mp_word i = 1; i < MP_WORDS; ++i) {
+	for (uint32_t i = 1; i < MP_WORDS; ++i) {
 		r->d[i] += c;
 		c = r->d[i] == 0 ? 1 : 0;
 		if (c == 0) break;
@@ -401,10 +401,10 @@ mp_word mp_add_size(mp_number* const r, const uint32_t a) {
 
 // Multiprecision addition of the modulus saved in mod. Overflow signalled via return value.
 __device__
-mp_word mp_add_mod(mp_number* const r) {
-	mp_word c = 0;
+uint32_t mp_add_mod(mp_number* const r) {
+	uint32_t c = 0;
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		r->d[i] += mod.d[i] + c;
 		c = r->d[i] < mod.d[i] ? 1 : (r->d[i] == mod.d[i] ? c : 0);
 	}
@@ -414,8 +414,8 @@ mp_word mp_add_mod(mp_number* const r) {
 
 
 __device__
-mp_word mp_mod_add(mp_number* const r, const mp_number* const a) {
-	mp_word c = 0;
+uint32_t mp_mod_add(mp_number* const r, const mp_number* const a) {
+	uint32_t c = 0;
 	c = mp_add(r, a);
 	if (c) {
 		mp_sub_mod(r);
@@ -425,18 +425,18 @@ mp_word mp_mod_add(mp_number* const r, const mp_number* const a) {
 
 // Multiprecision addition of two numbers with one extra word each. Overflow signalled via return value.
 __device__
-mp_word mp_add_more(mp_number* const r, mp_word* const extraR, const mp_number* const a, const mp_word* const extraA) {
-	const mp_word c = mp_add(r, a);
+uint32_t mp_add_more(mp_number* const r, uint32_t* const extraR, const mp_number* const a, const uint32_t* const extraA) {
+	const uint32_t c = mp_add(r, a);
 	*extraR += *extraA + c;
 	return *extraR < *extraA ? 1 : (*extraR == *extraA ? c : 0);
 }
 
 // Multiprecision greater than or equal (>=) operator
 __device__
-mp_word mp_gte(const mp_number* const a, const mp_number* const b) {
-	mp_word l = 0, g = 0;
+uint32_t mp_gte(const mp_number* const a, const mp_number* const b) {
+	uint32_t l = 0, g = 0;
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		if (a->d[i] < b->d[i]) l |= (1 << i);
 		if (a->d[i] > b->d[i]) g |= (1 << i);
 	}
@@ -446,7 +446,7 @@ mp_word mp_gte(const mp_number* const a, const mp_number* const b) {
 
 // Bit shifts a number with an extra word to the right one step
 __device__
-void mp_shr_extra(mp_number* const r, mp_word* const e) {
+void mp_shr_extra(mp_number* const r, uint32_t* const e) {
 	r->d[0] = (r->d[1] << 31) | (r->d[0] >> 1);
 	r->d[1] = (r->d[2] << 31) | (r->d[1] >> 1);
 	r->d[2] = (r->d[3] << 31) | (r->d[2] >> 1);
@@ -474,12 +474,12 @@ void mp_shr(mp_number* const r) {
 // Multiplies a number with a word and adds it to an existing number with an extra word, overflow of the extra word is signalled in return value
 // This is a special function only used for modular multiplication
 __device__
-mp_word mp_mul_word_add_extra(mp_number* const r, const mp_number* const a, const mp_word w, mp_word* const extra) {
-	mp_word cM = 0; // Carry for multiplication
-	mp_word cA = 0; // Carry for addition
-	mp_word tM = 0; // Temporary storage for multiplication
+uint32_t mp_mul_word_add_extra(mp_number* const r, const mp_number* const a, const uint32_t w, uint32_t* const extra) {
+	uint32_t cM = 0; // Carry for multiplication
+	uint32_t cA = 0; // Carry for addition
+	uint32_t tM = 0; // Temporary storage for multiplication
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		tM = (a->d[i] * w + cM);
 		cM = mul_hi(a->d[i], w) + (tM < cM);
 
@@ -494,19 +494,19 @@ mp_word mp_mul_word_add_extra(mp_number* const r, const mp_number* const a, cons
 // Multiplies a number with a word, potentially adds modhigher to it, and then subtracts it from en existing number, no extra words, no overflow
 // This is a special function only used for modular multiplication
 __device__
-void mp_mul_mod_word_sub(mp_number* const r, const mp_word w, const bool withModHigher) {
+void mp_mul_mod_word_sub(mp_number* const r, const uint32_t w, const bool withModHigher) {
 	// Having these numbers declared here instead of using the global values in __constant__ address space seems to lead
 	// to better optimizations by the compiler on my GTX 1070.
 	mp_number mod = { { 0xfffffc2f, 0xfffffffe, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff} };
 	mp_number modhigher = { {0x00000000, 0xfffffc2f, 0xfffffffe, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff} };
 
-	mp_word cM = 0; // Carry for multiplication
-	mp_word cS = 0; // Carry for subtraction
-	mp_word tS = 0; // Temporary storage for subtraction
-	mp_word tM = 0; // Temporary storage for multiplication
-	mp_word cA = 0; // Carry for addition of modhigher
+	uint32_t cM = 0; // Carry for multiplication
+	uint32_t cS = 0; // Carry for subtraction
+	uint32_t tS = 0; // Temporary storage for subtraction
+	uint32_t tM = 0; // Temporary storage for multiplication
+	uint32_t cA = 0; // Carry for addition of modhigher
 
-	for (mp_word i = 0; i < MP_WORDS; ++i) {
+	for (uint32_t i = 0; i < MP_WORDS; ++i) {
 		tM = (mod.d[i] * w + cM);
 		cM = mul_hi(mod.d[i], w) + (tM < cM);
 
@@ -531,7 +531,7 @@ void mp_mul_mod_word_sub(mp_number* const r, const mp_word w, const bool withMod
 __device__
 void mp_mod_mul(mp_number* const r, const mp_number* const X, const mp_number* const Y) {
 	mp_number Z = { {0} };
-	mp_word extraWord;
+	uint32_t extraWord;
 
 	for (int i = MP_WORDS - 1; i >= 0; --i) {
 		// Z = Z * 2^32
@@ -555,8 +555,8 @@ void mp_mod_inverse(mp_number* const r) {
 	mp_number C = { { 0 } };
 	mp_number v = mod;
 
-	mp_word extraA = 0;
-	mp_word extraC = 0;
+	uint32_t extraA = 0;
+	uint32_t extraC = 0;
 
 	while (r->d[0] || r->d[1] || r->d[2] || r->d[3] || r->d[4] || r->d[5] || r->d[6] || r->d[7]) {
 		while (!(r->d[0] & 1)) {
