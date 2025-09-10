@@ -4,7 +4,7 @@
   * @version	V1.3.0
   * @date		20-March-2023
   * @mail		houzich_anton@mail.ru
-  * discussion  https://t.me/BRUTE_FORCE_CRYPTO_WALLET
+  * discussion  https://t.me/brute_force_gpu
   ******************************************************************************
   */
 #pragma once

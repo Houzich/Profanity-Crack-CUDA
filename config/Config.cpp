@@ -4,7 +4,7 @@
   * @version	V1.3.0
   * @date		28-April-2023
   * @mail		houzich_anton@mail.ru
-  * discussion  https://t.me/BRUTE_FORCE_CRYPTO_WALLET
+  * discussion  https://t.me/brute_force_gpu
   ******************************************************************************
   */
 #include "Config.hpp"
@@ -30,5 +30,6 @@ int parse_config(ConfigClass* config, std::string path)
 	}
 	return 0;
 }
+
 
 

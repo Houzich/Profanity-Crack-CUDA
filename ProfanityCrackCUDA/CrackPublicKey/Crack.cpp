@@ -4,7 +4,7 @@
   * @version	V1.3.0
   * @date		28-April-2023
   * @mail		houzich_anton@mail.ru
-  * discussion  https://t.me/BRUTE_FORCE_CRYPTO_WALLET
+  * discussion  https://t.me/brute_force_gpu
   ******************************************************************************
   */
 #include <algorithm>
@@ -113,4 +113,5 @@ int crack_public_key(DataClass& data, std::vector<std::string>& publicKeys, Conf
 	}
 	return 0;
 }
+
 
