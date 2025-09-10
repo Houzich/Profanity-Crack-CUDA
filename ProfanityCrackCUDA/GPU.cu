@@ -1,10 +1,10 @@
-﻿/**
+/**
   ******************************************************************************
   * @author		Anton Houzich
   * @version	V1.3.0
   * @date		28-April-2023
   * @mail		houzich_anton@mail.ru
-  * discussion  https://t.me/BRUTE_FORCE_CRYPTO_WALLET
+  * discussion  https://t.me/brute_force_gpu
   ******************************************************************************
   */
 #include <stdafx.h>
@@ -936,13 +936,13 @@ __global__ void dev_crack_search_only_gpu(mp_number* const pDeltaX, mp_number* c
 	mp_number tmp = pInverse[idx];
 	mp_number lambda = pPrevLambda[idx];
 
-	// λ' = - (2G_y) / d' - λ <=> lambda := pInversedNegativeDoubleGy[id] - pPrevLambda[id]
+	// ?' = - (2G_y) / d' - ? <=> lambda := pInversedNegativeDoubleGy[id] - pPrevLambda[id]
 	mp_mod_sub(&lambda, &tmp, &lambda);
 
-	// λ² = λ * λ <=> tmp := lambda * lambda = λ²
+	// ?? = ? * ? <=> tmp := lambda * lambda = ??
 	mp_mod_mul(&tmp, &lambda, &lambda);
 
-	// d' = λ² - d - 3g = (-3g) - (d - λ²) <=> x := tripleNegativeGx - (x - tmp)
+	// d' = ?? - d - 3g = (-3g) - (d - ??) <=> x := tripleNegativeGx - (x - tmp)
 	mp_mod_sub(&dX, &dX, &tmp);
 	mp_mod_sub_const(&dX, &tripleNegativeGx, &dX);
 
@@ -950,7 +950,7 @@ __global__ void dev_crack_search_only_gpu(mp_number* const pDeltaX, mp_number* c
 	pPrevLambda[idx] = lambda;
 
 	// Calculate y from dX and lambda
-	// y' = (-G_Y) - λ * d' <=> p.y := negativeGy - (p.y * p.x)
+	// y' = (-G_Y) - ? * d' <=> p.y := negativeGy - (p.y * p.x)
 	mp_mod_mul(&tmp, &lambda, &dX);
 	mp_mod_sub_const(&tmp, &negativeGy, &tmp);
 
@@ -1007,13 +1007,13 @@ __global__ void dev_crack_search_only_cpu(mp_number* const pDeltaX, mp_number* c
 	mp_number tmp = pInverse[idx];
 	mp_number lambda = pPrevLambda[idx];
 
-	// λ' = - (2G_y) / d' - λ <=> lambda := pInversedNegativeDoubleGy[id] - pPrevLambda[id]
+	// ?' = - (2G_y) / d' - ? <=> lambda := pInversedNegativeDoubleGy[id] - pPrevLambda[id]
 	mp_mod_sub(&lambda, &tmp, &lambda);
 
-	// λ² = λ * λ <=> tmp := lambda * lambda = λ²
+	// ?? = ? * ? <=> tmp := lambda * lambda = ??
 	mp_mod_mul(&tmp, &lambda, &lambda);
 
-	// d' = λ² - d - 3g = (-3g) - (d - λ²) <=> x := tripleNegativeGx - (x - tmp)
+	// d' = ?? - d - 3g = (-3g) - (d - ??) <=> x := tripleNegativeGx - (x - tmp)
 	mp_mod_sub(&dX, &dX, &tmp);
 	mp_mod_sub_const(&dX, &tripleNegativeGx, &dX);
 
@@ -1021,7 +1021,7 @@ __global__ void dev_crack_search_only_cpu(mp_number* const pDeltaX, mp_number* c
 	pPrevLambda[idx] = lambda;
 
 	// Calculate y from dX and lambda
-	// y' = (-G_Y) - λ * d' <=> p.y := negativeGy - (p.y * p.x)
+	// y' = (-G_Y) - ? * d' <=> p.y := negativeGy - (p.y * p.x)
 	mp_mod_mul(&tmp, &lambda, &dX);
 	mp_mod_sub_const(&tmp, &negativeGy, &tmp);
 
@@ -1052,13 +1052,13 @@ __global__ void dev_crack_search_gpu_cpu(mp_number* const pDeltaX, mp_number* co
 	mp_number tmp = pInverse[idx];
 	mp_number lambda = pPrevLambda[idx];
 
-	// λ' = - (2G_y) / d' - λ <=> lambda := pInversedNegativeDoubleGy[id] - pPrevLambda[id]
+	// ?' = - (2G_y) / d' - ? <=> lambda := pInversedNegativeDoubleGy[id] - pPrevLambda[id]
 	mp_mod_sub(&lambda, &tmp, &lambda);
 
-	// λ² = λ * λ <=> tmp := lambda * lambda = λ²
+	// ?? = ? * ? <=> tmp := lambda * lambda = ??
 	mp_mod_mul(&tmp, &lambda, &lambda);
 
-	// d' = λ² - d - 3g = (-3g) - (d - λ²) <=> x := tripleNegativeGx - (x - tmp)
+	// d' = ?? - d - 3g = (-3g) - (d - ??) <=> x := tripleNegativeGx - (x - tmp)
 	mp_mod_sub(&dX, &dX, &tmp);
 	mp_mod_sub_const(&dX, &tripleNegativeGx, &dX);
 
@@ -1066,7 +1066,7 @@ __global__ void dev_crack_search_gpu_cpu(mp_number* const pDeltaX, mp_number* co
 	pPrevLambda[idx] = lambda;
 
 	// Calculate y from dX and lambda
-	// y' = (-G_Y) - λ * d' <=> p.y := negativeGy - (p.y * p.x)
+	// y' = (-G_Y) - ? * d' <=> p.y := negativeGy - (p.y * p.x)
 	mp_mod_mul(&tmp, &lambda, &dX);
 	mp_mod_sub_const(&tmp, &negativeGy, &tmp);
 
@@ -1133,5 +1133,6 @@ __global__ void dev_crack_search_gpu_cpu(mp_number* const pDeltaX, mp_number* co
 		m_memResult->id[score] = idx;
 	}
 }
+
 
 
