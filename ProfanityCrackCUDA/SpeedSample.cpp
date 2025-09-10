@@ -4,7 +4,7 @@
   * @version	V1.3.0
   * @date		28-April-2023
   * @mail		houzich_anton@mail.ru
-  * discussion  https://t.me/BRUTE_FORCE_CRYPTO_WALLET
+  * discussion  https://t.me/brute_force_gpu
   ******************************************************************************
   */
 #include "SpeedSample.hpp"
@@ -47,3 +47,4 @@ void SpeedSample::sample(const double V) {
 SpeedSample::timepoint SpeedSample::now() {
 	return std::chrono::steady_clock::now();
 }
+
