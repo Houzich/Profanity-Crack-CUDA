@@ -4,7 +4,7 @@
   * @version	V1.3.0
   * @date		28-April-2023
   * @mail		houzich_anton@mail.ru
-  * discussion  https://t.me/BRUTE_FORCE_CRYPTO_WALLET
+  * discussion  https://t.me/brute_force_gpu
   ******************************************************************************
   */
 #pragma once
@@ -16,6 +16,7 @@
 
 int checkResult(DataClass& data, resultFound* result, size_t prev_score, size_t round, ConfigClass& config);
 int searchKeysCPU(host_buffers_class& data, point* keys, size_t num_keys, size_t round, ConfigClass& config);
+
 
 
 
