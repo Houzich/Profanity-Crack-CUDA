@@ -115,3 +115,4 @@ int crack_public_key(DataClass& data, std::vector<std::string>& publicKeys, Conf
 }
 
 
+

@@ -28,3 +28,4 @@ namespace tools {
 	std::string pointToHEX(point* point);
 	std::string privateKeyToHEX(private_key* privKey);
 }
+

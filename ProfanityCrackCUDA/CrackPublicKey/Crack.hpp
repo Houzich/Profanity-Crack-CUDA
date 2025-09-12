@@ -17,3 +17,4 @@
 int crack_public_key(DataClass& data, std::vector<std::string>& publicKeys, ConfigClass& config);
 #endif /* HPP_CRACK_PUBLIC_KEY */
 
+

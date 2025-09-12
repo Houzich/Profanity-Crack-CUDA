@@ -20,3 +20,4 @@ __global__ void dev_crack_search_only_gpu(mp_number* const pDeltaX, mp_number* c
 __global__ void dev_crack_search_only_cpu(mp_number* const pDeltaX, mp_number* const pInverse, mp_number* const pPrevLambda, point* __restrict__ m_memResult);
 __global__ void dev_crack_search_gpu_cpu(mp_number* const pDeltaX, mp_number* const pInverse, mp_number* const pPrevLambda, const tableStruct* __restrict__ tables, point* __restrict__ m_memResultKeys, resultFound* __restrict__ m_memResult);
 
+

@@ -48,3 +48,4 @@ SpeedSample::timepoint SpeedSample::now() {
 	return std::chrono::steady_clock::now();
 }
 
+

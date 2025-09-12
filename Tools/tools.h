@@ -21,3 +21,4 @@ namespace tools {
 	int readTables(tableStruct* tables, std::string path);
 	void saveResult(private_key privateKey, point publicKey);
 }
+

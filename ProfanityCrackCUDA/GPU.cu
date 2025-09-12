@@ -1136,3 +1136,4 @@ __global__ void dev_crack_search_gpu_cpu(mp_number* const pDeltaX, mp_number* co
 
 
 
+

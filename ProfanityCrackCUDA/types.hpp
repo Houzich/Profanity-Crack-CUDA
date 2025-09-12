@@ -34,3 +34,4 @@ typedef struct {
 } private_key;
 
 #endif /* HPP_TYPES */
+
